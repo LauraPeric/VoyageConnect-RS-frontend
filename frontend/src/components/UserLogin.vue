@@ -1,38 +1,49 @@
 <template>
-    <div class="login">
-      <h1>Login</h1>
-      <form @submit.prevent="handleLogin">
-        <div>
-          <label for="email">Email</label>
-          <input type="email" v-model="email" required />
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input type="password" v-model="password" required />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'UserLogin', 
-    data() {
-      return {
-        email: '',
-        password: ''
-      };
-    },
-    methods: {
-      handleLogin() {
-        // Tvoja logika za login
-        console.log('Login with:', this.email, this.password);
+  <div class="login">
+    <h1>Login</h1>
+    <form @submit.prevent="handleLogin">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" v-model="email" required />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" v-model="password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import apiClient from "../axios";
+
+export default {
+  name: "UserLogin",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async handleLogin() {
+      try {
+        const response = await apiClient.post("/login", {
+          email: this.email,
+          password: this.password,
+        });
+        console.log(response.data);
+        alert("Login successful!");
+      } catch (error) {
+        console.error(error);
+        alert("Login failed!");
       }
-    }
-  };
-  </script>
-  
+    },
+  },
+};
+</script>
+
   <style scoped>
   .login {
     max-width: 400px;

@@ -14,7 +14,7 @@
 import apiClient from "../axios";
 
 export default {
-  name: 'UserRegister',
+  name: "UserRegister",
   data() {
     return {
       username: "",
@@ -42,5 +42,4 @@ export default {
 </script>
 
 <style scoped>
-/* Stilovi za Register komponentu */
 </style>
